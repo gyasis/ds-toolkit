@@ -23,3 +23,14 @@ docker exec -it <container id> /bin/bash
 jupyter-notebook --ip 0.0.0.0 --allow-root
 ### commit a docker
 docker commit <docker container id> <new docker name>
+
+
+## set the default environment  hint edit bash
+
+nano ~/.bashrc
+
+source activate <name of environment>
+
+
+
+
