@@ -19,7 +19,7 @@ def precheck():
             else:
                 print(item + "->\t\t\t\t\t", (os.path.getsize(item)), "bytes")
 
-
+precheck()
 # %%
 
 # %%
