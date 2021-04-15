@@ -1,6 +1,3 @@
-
-
-
 def collectNames(dataframe):
         columns = list(dataframe.columns)
         return columns 
@@ -15,6 +12,8 @@ def collectgraph(dataframe, columns):
     
     scaler = StandardScaler()
     minmax = MinMaxScaler()
+
+
     tempdf = dataframe.select_dtypes(exclude=['object'])
     o_length = len(columns)
     new_length = len(list(tempdf.columns))
@@ -38,8 +37,10 @@ def collectgraph(dataframe, columns):
     fig, (ax1) = plt.subplots(ncols=1, figsize=(10, 8))
     ax1.set_title('Original Distributions')
     sns.kdeplot(data = tempdf,ax=ax1, legend=True)
+    
+    sns.heatmap(dfTrain.corr(),ax=ax1 annot=True);
 
-    sns.pairplot(dataframe , diag_kind='kde'
+    sns.pairplot(dataframe,ax=ax1 diag_kind='kde')
 
     
 def buildgraph(dataframe):
