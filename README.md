@@ -3,8 +3,7 @@ Personal Toolkit for Data Analysis
 
 This is my personal sandbox.
 
-
-Unifinished files in the root directory.
+Unfinished files and experiments are in the root directory.
 
 ### Finished code and tools will be in their respective places ###
 
