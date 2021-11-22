@@ -6,5 +6,5 @@ This is my personal sandbox.
 
 Unifinished files in the root directory.
 
-### Finished code and tools will be in there respective places ###
+### Finished code and tools will be in their respective places ###
 
