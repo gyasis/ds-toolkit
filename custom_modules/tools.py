@@ -1,3 +1,6 @@
+
+
+# checking target column splits and 
 def prepare_class_split(dataframe, target="class_name", p_split=0.30, test_target_split=0.50):
   dataframe = dataframe.copy()
   df_len = len(dataframe)
@@ -41,3 +44,34 @@ def prepare_class_split(dataframe, target="class_name", p_split=0.30, test_targe
   outcomes_df["Outcome"] = outcomes
   outcomes_df.set_index("Class", inplace=True)
   return outcomes_df
+
+
+# gets weights and graphs changes 
+def get_class_frequencies(dataframe,target):
+  try:
+    dataframe = pd.get_dummies(dataframe[target].astype(str))
+  except:
+    dataframe = pd.get_dummies(dataframe[target])
+    
+  f, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
+  sample_array = np.array(dataframe)
+  positive_freq = sample_array.sum(axis=0) / sample_array.shape[0]
+  negative_freq = np.ones(positive_freq.shape) - positive_freq
+  data = pd.DataFrame({"Class": dataframe.columns, "Label": "Positive", "Value": positive_freq})
+  data = data.append([{"Class": dataframe.columns[l], "Label": "Negative", "Value": v} for l, v in enumerate(negative_freq)], ignore_index=True)
+  plt.xticks(rotation=90)
+  sns.barplot(x="Class", y="Value",hue="Label", data=data, ax=ax1)
+  pos_weights = negative_freq
+  neg_weights = positive_freq
+  pos_contribution = positive_freq * pos_weights
+  neg_contribution = negative_freq * neg_weights
+
+  # print("Weight to be added:  ",pos_contribution)
+  
+  data1 = pd.DataFrame({"Class": dataframe.columns, "Label": "Positive", "Value": pos_contribution})
+  data1 = data1.append([{"Class": dataframe.columns[l], "Label": "Negative", "Value": v} for l, v in enumerate(neg_contribution)], ignore_index=True)
+  ax1.tick_params(axis='x', labelrotation=90)
+  ax2.tick_params(axis='x', labelrotation=90)
+  sns.barplot(x="Class", y="Value",hue="Label", data=data1, ax=ax2)
+  
+  return pos_contribution
