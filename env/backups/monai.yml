@@ -1,0 +1,4 @@
+name: monai
+channels:
+  - defaults
+prefix: /home/gyasis/miniconda3/envs/monai
