@@ -31,7 +31,7 @@ SOUTHAMERICA = ['AR','BO','BR','CL','CO','EC','FK','GF','GY','PY','PE','SR','UY'
 NORTHAMERICA = ['AG','BS','BB','BZ','CA','CR','CU','DM','DO','SV','GD','GT','HT','HN','JM','MX','NI','PA','PR','BL','KN','LC','MF','PM','VC','TT','US','VG','VI']
 # %%
 # subset of dataframe only EU countries
-df = df[df.country_region_code.isin(EU)]
+df = df[df.country_region_code.is('US')]
 # %%
 df.head(20)
 # %%
@@ -73,3 +73,46 @@ def exp_plot(select_origin, select_cyl):
 pn.Column(select_origin, select_cyl, exp_plot).embed()
                                                           
 # %%
+import datashader as ds, bokeh, holoviews as hv  # noqa
+from distutils.version import LooseVersion
+
+min_versions = dict(ds='0.13.0', bokeh='2.3.2', hv='1.14.4')
+
+for lib, ver in min_versions.items():
+    v = globals()[lib].__version__
+    if LooseVersion(v) < LooseVersion(ver):
+        print("Error: expected {}={}, got {}".format(lib,ver,v))
+    else:
+        print('Everything is Kosher!\U0001F60E')
+# %%
+hv.extension('bokeh', 'matplotlib')
+# %%
+df[df['country_region_code'] =='AE'].plot(x='date', y='transit_stations_percent_change_from_baseline',figsize=(20,10))
+
+# %%
+
+# %%
+df.head()
+# %%
+#Personal Tool
+# collect all methods in a list and use a for loop to get help on each method and create a markdown file
+
+def methods_deepdive(x):
+    # from mdutils.mdutils import MdUtils
+    # from mdutils import Html
+    
+    # mdFile = MdUtils(file_name=(x+'.markdown'), title=f('{x}')) 
+    
+    methods = dir(x)
+    print(methods)
+    
+    for method in methods:
+            print(method)
+            help(str(method))
+         
+# %%
+methods_deepdive(df)
+# %%
+#RETURN year from date object
+def get_year(x):
+    return x.year
