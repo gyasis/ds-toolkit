@@ -1,0 +1,4 @@
+name: pytorch_financial
+channels:
+  - defaults
+prefix: /home/gyasis/miniconda3/envs/pytorch_financial
