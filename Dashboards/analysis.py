@@ -217,3 +217,5 @@ y = pn.widgets.Select(name='Country', options=ALL)
 d = pn.widgets.DataFrame((df[df.code == 'AE'].sample(n=10)),name="TRee")
 d
 # %%
+
+# %%

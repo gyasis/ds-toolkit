@@ -75,3 +75,8 @@ def get_class_frequencies(dataframe,target):
   sns.barplot(x="Class", y="Value",hue="Label", data=data1, ax=ax2)
   
   return pos_contribution
+
+
+def lists2df(list1, list2, title1, title2):
+    df = pd.DataFrame(zip(list1, list2), columns =[title1, title2])
+    return df
