@@ -1,0 +1,70 @@
+# %%
+
+from tabulate import tabulate
+from datetime import datetime, timedelta
+
+# Define the proficiency levels and the number of hours required to reach each level
+    
+
+
+
+proficiency_levels = {'A1': 200, 'A2': 300, 'B1': 400, 'B2': 800}
+
+#get now datetime and get amount of days from entered data
+
+def get_days_from_now(b2_date):
+    now = datetime.now()
+    return (b2_date - now).days
+
+def calculate_milestone(now, hours_per_day, proficiency_levels):
+    # Calculate the estimated date of each milestone
+
+    
+    a1_date = now + timedelta(days=(proficiency_levels['A1'] / hours_per_day))
+    a2_date = now + timedelta(days=(proficiency_levels['A2'] / hours_per_day))
+    b1_date = now + timedelta(days=(proficiency_levels['B1'] / hours_per_day))
+    b2_date = now + timedelta(days=(proficiency_levels['B2'] / hours_per_day))
+    
+    
+    # make dates readable
+    
+    return a1_date, a2_date, b1_date, b2_date
+
+
+
+# %%
+
+
+while True:
+    # Prompt the user for the target date of B2 completion
+    b2_date_text = input('Enter the target date of B2 completion (mm/dd/yyyy): ')
+    # Convert the user input to a datetime object
+    b2_date = datetime.strptime(b2_date_text, '%m/%d/%Y')
+
+    # Prompt the user for the number of hours per day or week
+    hours_per_day_text = input('Enter the number of hours per day or week (d/w): ')
+    if hours_per_day_text == 'w':
+        #divided by 7 to get hours per day
+        hours_per_day = float(input('Enter the number of hours per week: ')) / 7
+    elif hours_per_day_text == 'd':
+        hours_per_day = float(input('Enter the number of hours per day: '))
+        
+        
+        
+    # Calculate the estimated date of each milestone
+    a1_date, a2_date, b1_date, b2_date = calculate_milestone(datetime.now(), hours_per_day, proficiency_levels)
+    
+    
+    # Display the milestones in a table
+    print(tabulate([
+    ['A1', a1_date.strftime('%m/%d/%Y')],
+    ['A2', a2_date.strftime('%m/%d/%Y')],
+    ['B1', b1_date.strftime('%m/%d/%Y')],
+    ['B2', b2_date.strftime('%m/%d/%Y')]
+    ], headers=['Milestone', 'Estimated Date']))
+   
+    # Prompt the user to rerun the script or quit
+    repeat = input('Enter "r" to rerun the script, or "q" to quit: ')
+    if repeat == 'q':
+        break
+# %%
