@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 
 
 
-proficiency_levels = {'A1': 200, 'A2': 300, 'B1': 400, 'B2': 800}
+proficiency_levels = {'A1': 200, 'A2': 300, 'B1': 400, 'B2': 750}
 
 #get now datetime and get amount of days from entered data
 
@@ -40,7 +40,8 @@ while True:
     b2_date_text = input('Enter the target date of B2 completion (mm/dd/yyyy): ')
     # Convert the user input to a datetime object
     b2_date = datetime.strptime(b2_date_text, '%m/%d/%Y')
-
+    original_b2_date = b2_date
+    
     # Prompt the user for the number of hours per day or week
     hours_per_day_text = input('Enter the number of hours per day or week (d/w): ')
     if hours_per_day_text == 'w':
@@ -54,6 +55,10 @@ while True:
     # Calculate the estimated date of each milestone
     a1_date, a2_date, b1_date, b2_date = calculate_milestone(datetime.now(), hours_per_day, proficiency_levels)
     
+    #if calculated b2 date is after the target date, then warn that date will be passed and give a weekly hour estimate to get to target
+    # if b2_date > original_b2_date:
+    #     print('Warning: The target date of B2 completion will be passed.')
+    #     print('You will need to study', round((get_days_from_now(original_b2_date) * 6yt hours_per_day) / 7, 2), 'hours per week to reach the target date.')
     
     # Display the milestones in a table
     print(tabulate([

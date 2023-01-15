@@ -1,0 +1,14 @@
+name: pycaret
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - ipykernel
+  - jupyterlab
+  - dask-sql
+  - graphistry
+  - cuml=22.08
+  - tensorflow
+  - dash
+  - cudatoolkit=11.2
+prefix: /home/gyasis/miniconda3/envs/pycaret
